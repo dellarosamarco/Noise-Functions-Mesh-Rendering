@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Sine : MonoBehaviour
+public static class Sine
 {
-    // Start is called before the first frame update
-    void Start()
+    public static float[,] generateSineNoise(Vector2Int mapSize)
     {
-        
-    }
+        int xSize = mapSize.x;
+        int ySize = mapSize.y;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        float[,] sineNoise = new float[xSize, ySize];
+
+        for (int x = 0; x < xSize; x++)
+        {
+            for (int y = 0; y < ySize; y++)
+            {
+                sineNoise[x, y] = Random.Range(0f, 1f);
+            }
+        }
+
+        return sineNoise;
     }
 }
