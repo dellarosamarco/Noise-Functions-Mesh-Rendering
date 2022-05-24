@@ -7,14 +7,17 @@ public class NoiseGenerator : MonoBehaviour
     public ColorType colorType;
 
     [Header("Settings")]
+    public int seed;
     public Vector2Int mapSize;
     public float frequency;
     public float amplitude;
     public Vector2 offset;
     public bool useNoiseCurve;
     public AnimationCurve noiseCurve;
+    public int octaves;
+    public Vector2 octaveRandomOffset;
 
-    [Header("Renderes")]
+    [Header("Renderers")]
     public Mesh defaultMesh;
     public MeshFilter meshFilter;
     public MeshRenderer meshRenderer;
@@ -24,11 +27,13 @@ public class NoiseGenerator : MonoBehaviour
 
     public void generateNoise()
     {
+        UnityEngine.Random.InitState(seed);
+
         AnimationCurve curve = useNoiseCurve ? noiseCurve : null;
         float[,] noise;
 
         if (noiseType == NoiseType.Sine)
-            noise = Sine.generateSineNoise(mapSize, frequency, amplitude, offset, curve);
+            noise = Sine.generateSineNoise(mapSize, frequency, amplitude, offset, octaves, octaveRandomOffset, curve);
         else if (noiseType == NoiseType.Tan)
             noise = Tan.generateTanNoise(mapSize, frequency, amplitude, offset, curve);
         else if (noiseType == NoiseType.Circles)
