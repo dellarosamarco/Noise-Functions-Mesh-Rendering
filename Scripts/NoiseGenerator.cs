@@ -2,32 +2,44 @@ using UnityEngine;
 
 public class NoiseGenerator : MonoBehaviour
 {
+    public DrawType drawType;
+    public ColorType colorType;
+
     public Vector2Int mapSize;
     public float frequency;
     public float amplitude;
     public Vector2 offset;
 
-    [Header("Texture Components")]
-    public MeshRenderer textureMeshRenderer;
-
-    [Header("Mesh Components")]
+    [Header("Renderes")]
+    public Mesh defaultMesh;
     public MeshFilter meshFilter;
     public MeshRenderer meshRenderer;
+
+    [Header("Components")]
+    public HeightMapColorsHelper heightMapColorsHelper;
 
     public void generateNoise()
     {
         float[,] sineNoise = Sine.generateSineNoise(mapSize, frequency, amplitude, offset);
-        Texture2D texture = TextureGenerator.generateTexture(mapSize, sineNoise);
-        Mesh mesh = MeshGenerator.generateMesh(mapSize, sineNoise);
+        HeightMapColor[] heightMapColors = heightMapColorsHelper.getHeightMapColor(colorType);
+        Texture2D texture = TextureGenerator.generateTexture(mapSize, sineNoise, heightMapColors, amplitude);
 
-        //visualizeNoiseTexture(texture);
-        visualizeNoiseMesh(texture, mesh);
+        if(drawType == DrawType.NoiseMap)
+        {
+            visualizeNoiseTexture(texture);
+        }
+        else if(drawType == DrawType.HeightMap)
+        {
+            Mesh mesh = MeshGenerator.generateMesh(mapSize, sineNoise);
+            visualizeNoiseMesh(texture, mesh);
+        }
     }
 
     public void visualizeNoiseTexture(Texture2D texture)
     {
-        textureMeshRenderer.sharedMaterial.mainTexture = texture;
-        textureMeshRenderer.transform.localScale = new Vector3(texture.width, 1, texture.height);
+        meshRenderer.sharedMaterial.mainTexture = texture;
+        meshRenderer.transform.localScale = new Vector3(texture.width, 1, texture.height);
+        meshFilter.sharedMesh = defaultMesh;
     }
 
     public void visualizeNoiseMesh(Texture2D texture, Mesh mesh)
