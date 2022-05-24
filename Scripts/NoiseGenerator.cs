@@ -5,10 +5,13 @@ public class NoiseGenerator : MonoBehaviour
     public DrawType drawType;
     public ColorType colorType;
 
+    [Header("Settings")]
     public Vector2Int mapSize;
     public float frequency;
     public float amplitude;
     public Vector2 offset;
+    public bool useNoiseCurve;
+    public AnimationCurve noiseCurve;
 
     [Header("Renderes")]
     public Mesh defaultMesh;
@@ -20,7 +23,8 @@ public class NoiseGenerator : MonoBehaviour
 
     public void generateNoise()
     {
-        float[,] sineNoise = Sine.generateSineNoise(mapSize, frequency, amplitude, offset);
+        AnimationCurve curve = useNoiseCurve ? noiseCurve : null;
+        float[,] sineNoise = Sine.generateSineNoise(mapSize, frequency, amplitude, offset, curve);
         HeightMapColor[] heightMapColors = heightMapColorsHelper.getHeightMapColor(colorType);
         Texture2D texture = TextureGenerator.generateTexture(mapSize, sineNoise, heightMapColors, amplitude);
 

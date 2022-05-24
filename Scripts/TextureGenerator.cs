@@ -16,7 +16,7 @@ public static class TextureGenerator
                 Color color = Color.Lerp(Color.black, Color.white, noise[x, y]);
                 for (int i = 0; i < heightMapColors.Length; i++)
                 {
-                    if(noise[x, y] < heightMapColors[i].height * amplitude)
+                    if(noise[x, y] <= heightMapColors[i].height * amplitude)
                     {
                         color = heightMapColors[i].color;
                         break;

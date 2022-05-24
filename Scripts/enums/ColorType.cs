@@ -1,4 +1,5 @@
 public enum ColorType
 {
-    SineNoise
+    SineNoise,
+    Rainbow
 }
