@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class NoiseGenerator : MonoBehaviour
 {
+    public NoiseType noiseType;
     public DrawType drawType;
     public ColorType colorType;
 
@@ -24,9 +25,17 @@ public class NoiseGenerator : MonoBehaviour
     public void generateNoise()
     {
         AnimationCurve curve = useNoiseCurve ? noiseCurve : null;
-        float[,] sineNoise = Sine.generateSineNoise(mapSize, frequency, amplitude, offset, curve);
+        float[,] noise;
+
+        if (noiseType == NoiseType.Sine)
+            noise = Sine.generateSineNoise(mapSize, frequency, amplitude, offset, curve);
+        else if (noiseType == NoiseType.Tan)
+            noise = Tan.generateTanNoise(mapSize, frequency, amplitude, offset, curve);
+        else
+            noise = new float[0, 0];
+
         HeightMapColor[] heightMapColors = heightMapColorsHelper.getHeightMapColor(colorType);
-        Texture2D texture = TextureGenerator.generateTexture(mapSize, sineNoise, heightMapColors, amplitude);
+        Texture2D texture = TextureGenerator.generateTexture(mapSize, noise, heightMapColors, amplitude);
 
         if(drawType == DrawType.NoiseMap)
         {
@@ -34,7 +43,7 @@ public class NoiseGenerator : MonoBehaviour
         }
         else if(drawType == DrawType.HeightMap)
         {
-            Mesh mesh = MeshGenerator.generateMesh(mapSize, sineNoise);
+            Mesh mesh = MeshGenerator.generateMesh(mapSize, noise);
             visualizeNoiseMesh(texture, mesh);
         }
     }
