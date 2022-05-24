@@ -31,6 +31,8 @@ public class NoiseGenerator : MonoBehaviour
             noise = Sine.generateSineNoise(mapSize, frequency, amplitude, offset, curve);
         else if (noiseType == NoiseType.Tan)
             noise = Tan.generateTanNoise(mapSize, frequency, amplitude, offset, curve);
+        else if (noiseType == NoiseType.Circles)
+            noise = Circles.generateCirclesNoise(mapSize, frequency, amplitude, offset, curve);
         else
             noise = new float[0, 0];
 

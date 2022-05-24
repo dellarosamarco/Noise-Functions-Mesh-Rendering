@@ -26,7 +26,7 @@ public static class MeshGenerator
                 vertices[vertex] = tempVector;
                 uvs[vertex] = new Vector2(x / (float)xSize, y / (float)ySize);
 
-                if(x < xSize-1 && y < ySize - 1)
+                if(x < xSize-1 && y < ySize-1)
                 {
                     int[] square = generateSquare(vertex, mapSize);
 

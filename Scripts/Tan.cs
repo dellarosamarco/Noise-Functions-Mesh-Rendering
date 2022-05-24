@@ -9,13 +9,13 @@ public class Tan : MonoBehaviour
 
         float[,] tanNoise = new float[xSize, ySize];
 
-        float deg = 1 + (offset.y * xSize + offset.x);
+        float deg;
         for (int x = 0; x < xSize; x++)
         {
             deg = 1 + (offset.y * xSize + offset.x);
             for (int y = 0; y < ySize; y++)
             {
-                var rad = deg * Mathf.PI / 180;
+                float rad = deg * Mathf.PI / 180;
                 if (noiseCurve != null)
                     tanNoise[x, y] = noiseCurve.Evaluate(Mathf.Tan(rad * frequency)) * amplitude;
                 else

@@ -1,5 +1,5 @@
 public enum DrawType
 {
     NoiseMap,
-    HeightMap
+    HeightMap,
 }
