@@ -37,7 +37,7 @@ public class NoiseGenerator : MonoBehaviour
         else if (noiseType == NoiseType.Tan)
             noise = Tan.generateTanNoise(mapSize, frequency, amplitude, offset, curve);
         else if (noiseType == NoiseType.Circles)
-            noise = Circles.generateCirclesNoise(mapSize, frequency, amplitude, offset, curve);
+            noise = Circles.generateCirclesNoise(mapSize, frequency, amplitude, offset, octaves, octaveRandomOffset, curve);
         else
             noise = new float[0, 0];
 
