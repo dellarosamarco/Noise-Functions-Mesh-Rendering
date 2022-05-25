@@ -2,5 +2,6 @@ public enum NoiseType
 {
     Sine,
     Tan,
-    Circles
+    Circles,
+    Worley
 }

@@ -17,6 +17,10 @@ public class NoiseGenerator : MonoBehaviour
     public int octaves;
     public Vector2 octaveRandomOffset;
 
+    [Header("Worley Noise temp")]
+    public Vector2Int chunks;
+    public int pointsPerChunk;
+
     [Header("Renderers")]
     public Mesh defaultMesh;
     public MeshFilter meshFilter;
@@ -38,6 +42,8 @@ public class NoiseGenerator : MonoBehaviour
             noise = Tan.generateTanNoise(mapSize, frequency, amplitude, offset, curve);
         else if (noiseType == NoiseType.Circles)
             noise = Circles.generateCirclesNoise(mapSize, frequency, amplitude, offset, octaves, octaveRandomOffset, curve);
+        else if (noiseType == NoiseType.Worley)
+            noise = Worley.generateWorleyNoise(mapSize, frequency, amplitude, chunks, pointsPerChunk);
         else
             noise = new float[0, 0];
 
