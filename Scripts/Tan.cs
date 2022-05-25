@@ -2,8 +2,13 @@ using UnityEngine;
 
 public class Tan : MonoBehaviour
 {
-    public static float[,] generateTanNoise(Vector2Int mapSize, float frequency, float amplitude, Vector2 offset, AnimationCurve noiseCurve = null)
+    public static float[,] generateTanNoise(NoiseData noiseData, float frequency)
     {
+        Vector2Int mapSize = noiseData.mapSize;
+        Vector2 offset = noiseData.offset;
+        AnimationCurve noiseCurve = noiseData.useNoiseCurve ? noiseData.noiseCurve : null;
+        float amplitude = noiseData.amplitude;
+
         int xSize = mapSize.x;
         int ySize = mapSize.y;
 

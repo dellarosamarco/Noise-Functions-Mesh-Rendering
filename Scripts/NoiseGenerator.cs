@@ -6,14 +6,14 @@ public class NoiseGenerator : MonoBehaviour
     public DrawType drawType;
     public ColorType colorType;
 
+    public NoiseData noiseData;
+    public SineNoiseData sineNoiseData;
+
     [Header("Settings")]
     public int seed;
     public Vector2Int mapSize;
     public float frequency;
     public float amplitude;
-    public Vector2 offset;
-    public bool useNoiseCurve;
-    public AnimationCurve noiseCurve;
     public int octaves;
     public Vector2 octaveRandomOffset;
 
@@ -33,17 +33,16 @@ public class NoiseGenerator : MonoBehaviour
     {
         UnityEngine.Random.InitState(seed);
 
-        AnimationCurve curve = useNoiseCurve ? noiseCurve : null;
         float[,] noise;
 
         if (noiseType == NoiseType.Sine)
-            noise = Sine.generateSineNoise(mapSize, frequency, amplitude, offset, octaves, octaveRandomOffset, curve);
+            noise = Sine.generateSineNoise(noiseData, sineNoiseData);
         else if (noiseType == NoiseType.Tan)
-            noise = Tan.generateTanNoise(mapSize, frequency, amplitude, offset, curve);
+            noise = Tan.generateTanNoise(noiseData, frequency);
         else if (noiseType == NoiseType.Circles)
-            noise = Circles.generateCirclesNoise(mapSize, frequency, amplitude, offset, octaves, octaveRandomOffset, curve);
+            noise = Circles.generateCirclesNoise(noiseData, frequency, octaves, octaveRandomOffset);
         else if (noiseType == NoiseType.Worley)
-            noise = Worley.generateWorleyNoise(mapSize, frequency, amplitude, chunks, pointsPerChunk);
+            noise = Worley.generateWorleyNoise(noiseData, chunks, pointsPerChunk);
         else
             noise = new float[0, 0];
 

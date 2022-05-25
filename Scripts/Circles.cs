@@ -2,16 +2,14 @@ using UnityEngine;
 
 public static class Circles
 {
-    public static float[,] generateCirclesNoise(
-        Vector2Int mapSize, 
-        float frequency, 
-        float amplitude, 
-        Vector2 offset, 
-        int octaves,
-        Vector2 octaveRandomOffset,
-        AnimationCurve noiseCurve = null
+    public static float[,] generateCirclesNoise(NoiseData noiseData, float frequency, int octaves, Vector2 octaveRandomOffset
     )
     {
+        Vector2Int mapSize = noiseData.mapSize;
+        Vector2 offset = noiseData.offset;
+        AnimationCurve noiseCurve = noiseData.useNoiseCurve ? noiseData.noiseCurve : null;
+        float amplitude = noiseData.amplitude;
+
         int xSize = mapSize.x;
         int ySize = mapSize.y;
 

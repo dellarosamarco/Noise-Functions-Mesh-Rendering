@@ -3,8 +3,13 @@ using UnityEngine;
 
 public class Worley : MonoBehaviour
 {
-    public static float[,] generateWorleyNoise(Vector2Int mapSize, float frequency, float amplitude, Vector2Int chunks, int pointsPerChunk)
+    public static float[,] generateWorleyNoise(NoiseData noiseData, Vector2Int chunks, int pointsPerChunk)
     {
+        Vector2Int mapSize = noiseData.mapSize;
+        Vector2 offset = noiseData.offset;
+        AnimationCurve noiseCurve = noiseData.useNoiseCurve ? noiseData.noiseCurve : null;
+        float amplitude = noiseData.amplitude;
+
         // replace with onvalidate 
         if (chunks.x == 0 || chunks.y == 0) return new float[,] { };
 
@@ -32,7 +37,10 @@ public class Worley : MonoBehaviour
                     if (distance < minDistance) minDistance = distance;
                 }
 
-                worleyNoise[x, y] = minDistance * amplitude;
+                if(noiseCurve != null)
+                    worleyNoise[x, y] = noiseCurve.Evaluate(minDistance) * amplitude;
+                else
+                    worleyNoise[x, y] = minDistance * amplitude;
             }
         }
 

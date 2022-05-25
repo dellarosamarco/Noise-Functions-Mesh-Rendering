@@ -2,16 +2,16 @@ using UnityEngine;
 
 public static class Sine
 {
-    public static float[,] generateSineNoise(
-        Vector2Int mapSize, 
-        float frequency, 
-        float amplitude, 
-        Vector2 offset, 
-        int octaves, 
-        Vector2 octaveRandomOffset,
-        AnimationCurve noiseCurve=null
-    )
+    public static float[,] generateSineNoise(NoiseData noiseData, SineNoiseData sineNoiseData)
     {
+        Vector2Int mapSize = noiseData.mapSize;
+        Vector2 offset = noiseData.offset;
+        AnimationCurve noiseCurve = noiseData.useNoiseCurve ? noiseData.noiseCurve : null;
+        float amplitude = noiseData.amplitude;
+        float frequency = sineNoiseData.frequency;
+        int octaves = sineNoiseData.octaves;
+        Vector2 octaveRandomOffset = sineNoiseData.octaveRandomOffset;
+
         int xSize = mapSize.x;
         int ySize = mapSize.y;
 
