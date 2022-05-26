@@ -14,14 +14,17 @@ public class NoiseGenerator : MonoBehaviour
 
     [Header("Settings")]
     public int seed;
-    public float frequency;
-    public int octaves;
-    public Vector2 octaveRandomOffset;
 
     [Header("Renderers")]
     public Mesh defaultMesh;
     public MeshFilter meshFilter;
     public MeshRenderer meshRenderer;
+
+    [Range(0f, 1.5f)]
+    public float xPersistance;
+    [Range(0f, 1.5f)]
+    public float yPersistance;
+    public float lacunarity;
 
     [Header("Components")]
     public HeightMapColorsHelper heightMapColorsHelper;
@@ -33,7 +36,7 @@ public class NoiseGenerator : MonoBehaviour
         float[,] noise;
 
         if (noiseType == NoiseType.Sine)
-            noise = Sine.generateSineNoise(noiseData, sineNoiseData);
+            noise = Sine.generateSineNoise(noiseData, sineNoiseData, new Vector2(xPersistance, yPersistance), lacunarity);
         else if (noiseType == NoiseType.Tan)
             noise = Tan.generateTanNoise(noiseData, tanNoiseData);
         else if (noiseType == NoiseType.Circles)
