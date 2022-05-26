@@ -3,22 +3,20 @@ using UnityEngine;
 
 public class Worley : MonoBehaviour
 {
-    public static float[,] generateWorleyNoise(NoiseData noiseData, Vector2Int chunks, int pointsPerChunk)
+    public static float[,] generateWorleyNoise(NoiseData noiseData, WorleyNoiseData worleyNoiseData)
     {
         Vector2Int mapSize = noiseData.mapSize;
-        Vector2 offset = noiseData.offset;
         AnimationCurve noiseCurve = noiseData.useNoiseCurve ? noiseData.noiseCurve : null;
-        float amplitude = noiseData.amplitude;
 
         // replace with onvalidate 
-        if (chunks.x == 0 || chunks.y == 0) return new float[,] { };
+        if (worleyNoiseData.chunks.x == 0 || worleyNoiseData.chunks.y == 0) return new float[,] { };
 
         int xSize = mapSize.x;
         int ySize = mapSize.y;
 
         float[,] worleyNoise = new float[xSize, ySize];
 
-        List<Vector2> points = generateWorleyChunksPoints(mapSize, chunks, pointsPerChunk);
+        List<Vector2> points = generateWorleyChunksPoints(mapSize, worleyNoiseData.chunks, worleyNoiseData.pointsPerChunk, worleyNoiseData.spawnRate);
         Vector2 pixelPosition = Vector2.zero;
 
         for (int x = 0; x < xSize; x++)
@@ -38,16 +36,16 @@ public class Worley : MonoBehaviour
                 }
 
                 if(noiseCurve != null)
-                    worleyNoise[x, y] = noiseCurve.Evaluate(minDistance) * amplitude;
+                    worleyNoise[x, y] = noiseCurve.Evaluate(minDistance) * noiseData.amplitude;
                 else
-                    worleyNoise[x, y] = minDistance * amplitude;
+                    worleyNoise[x, y] = minDistance * noiseData.amplitude;
             }
         }
 
         return worleyNoise;
     }
 
-    private static List<Vector2> generateWorleyChunksPoints(Vector2Int mapSize, Vector2Int chunks, int pointsPerChunk)
+    private static List<Vector2> generateWorleyChunksPoints(Vector2Int mapSize, Vector2Int chunks, int pointsPerChunk, float spawnRate)
     {
         List<Vector2> points = new List<Vector2>();
 
@@ -65,11 +63,13 @@ public class Worley : MonoBehaviour
             {
                 for (int i = 0; i < pointsPerChunk; i++)
                 {
+                    if(Random.Range(0f,100f) < spawnRate)
+                    {
+                        pointPosition.x = Random.Range(x, x + xChunkSize);
+                        pointPosition.y = Random.Range(y, y + yChunkSize);
 
-                    pointPosition.x = Random.Range(x, x + xChunkSize);
-                    pointPosition.y = Random.Range(y, y + yChunkSize);
-
-                    points.Add(pointPosition);
+                        points.Add(pointPosition);
+                    }
                 }
             }
         }

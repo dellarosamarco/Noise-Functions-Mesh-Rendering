@@ -8,18 +8,15 @@ public class NoiseGenerator : MonoBehaviour
 
     public NoiseData noiseData;
     public SineNoiseData sineNoiseData;
+    public TanNoiseData tanNoiseData;
+    public CircleNoiseData circlesNoiseData;
+    public WorleyNoiseData worleyNoiseData;
 
     [Header("Settings")]
     public int seed;
-    public Vector2Int mapSize;
     public float frequency;
-    public float amplitude;
     public int octaves;
     public Vector2 octaveRandomOffset;
-
-    [Header("Worley Noise temp")]
-    public Vector2Int chunks;
-    public int pointsPerChunk;
 
     [Header("Renderers")]
     public Mesh defaultMesh;
@@ -38,16 +35,16 @@ public class NoiseGenerator : MonoBehaviour
         if (noiseType == NoiseType.Sine)
             noise = Sine.generateSineNoise(noiseData, sineNoiseData);
         else if (noiseType == NoiseType.Tan)
-            noise = Tan.generateTanNoise(noiseData, frequency);
+            noise = Tan.generateTanNoise(noiseData, tanNoiseData);
         else if (noiseType == NoiseType.Circles)
-            noise = Circles.generateCirclesNoise(noiseData, frequency, octaves, octaveRandomOffset);
+            noise = Circles.generateCirclesNoise(noiseData, circlesNoiseData);
         else if (noiseType == NoiseType.Worley)
-            noise = Worley.generateWorleyNoise(noiseData, chunks, pointsPerChunk);
+            noise = Worley.generateWorleyNoise(noiseData, worleyNoiseData);
         else
             noise = new float[0, 0];
 
         HeightMapColor[] heightMapColors = heightMapColorsHelper.getHeightMapColor(colorType);
-        Texture2D texture = TextureGenerator.generateTexture(mapSize, noise, heightMapColors, amplitude);
+        Texture2D texture = TextureGenerator.generateTexture(noiseData.mapSize, noise, heightMapColors, noiseData.amplitude);
 
         if(drawType == DrawType.NoiseMap)
         {
@@ -55,7 +52,7 @@ public class NoiseGenerator : MonoBehaviour
         }
         else if(drawType == DrawType.HeightMap)
         {
-            Mesh mesh = MeshGenerator.generateMesh(mapSize, noise);
+            Mesh mesh = MeshGenerator.generateMesh(noiseData.mapSize, noise);
             visualizeNoiseMesh(texture, mesh);
         }
     }
