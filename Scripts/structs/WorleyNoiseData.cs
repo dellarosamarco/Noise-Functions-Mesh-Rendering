@@ -7,4 +7,5 @@ public struct WorleyNoiseData
     public int pointsPerChunk;
     [Range(0,100)]
     public float spawnRate;
+    public Vector2 randomHeightOffset;
 }

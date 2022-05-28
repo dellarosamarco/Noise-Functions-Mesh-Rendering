@@ -20,12 +20,6 @@ public class NoiseGenerator : MonoBehaviour
     public MeshFilter meshFilter;
     public MeshRenderer meshRenderer;
 
-    [Range(0f, 1.5f)]
-    public float xPersistance;
-    [Range(0f, 1.5f)]
-    public float yPersistance;
-    public float lacunarity;
-
     [Header("Components")]
     public HeightMapColorsHelper heightMapColorsHelper;
 
@@ -36,7 +30,7 @@ public class NoiseGenerator : MonoBehaviour
         float[,] noise;
 
         if (noiseType == NoiseType.Sine)
-            noise = Sine.generateSineNoise(noiseData, sineNoiseData, new Vector2(xPersistance, yPersistance), lacunarity);
+            noise = Sine.generateSineNoise(noiseData, sineNoiseData);
         else if (noiseType == NoiseType.Tan)
             noise = Tan.generateTanNoise(noiseData, tanNoiseData);
         else if (noiseType == NoiseType.Circles)

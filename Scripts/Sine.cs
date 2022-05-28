@@ -2,13 +2,15 @@ using UnityEngine;
 
 public static class Sine
 {
-    public static float[,] generateSineNoise(NoiseData noiseData, SineNoiseData sineNoiseData, Vector2 persistance, float lacunarity)
+    public static float[,] generateSineNoise(NoiseData noiseData, SineNoiseData sineNoiseData)
     {
         AnimationCurve noiseCurve = noiseData.useNoiseCurve ? noiseData.noiseCurve : null;
         float amplitude = noiseData.amplitude;
         float frequency = sineNoiseData.frequency;
         int octaves = sineNoiseData.octaves;
         Vector2 octaveRandomOffset = sineNoiseData.octaveRandomOffset;
+        float xPersistance = sineNoiseData.xPersistance;
+        float yPersistance = sineNoiseData.yPersistance;
 
         float lowestNoiseHeight = 0f;
         float highestNoiseHeight = 0f;
@@ -29,8 +31,7 @@ public static class Sine
                 for (int i = 0; i < octaves; i++)
                 {
                     sineIndex += Random.Range(octaveRandomOffset.x, octaveRandomOffset.y);
-                    octaveAmplitude *= Random.Range(persistance.x,persistance.y);
-                    octaveFrequency *= lacunarity;
+                    octaveAmplitude *= Random.Range(xPersistance,yPersistance);
                 }
 
                 float noiseHeight = Mathf.Sin(sineIndex * octaveFrequency) * octaveAmplitude;
