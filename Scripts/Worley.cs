@@ -9,6 +9,7 @@ public class Worley : MonoBehaviour
         AnimationCurve noiseCurve = noiseData.useNoiseCurve ? noiseData.noiseCurve : null;
         Vector2 randomHeightOffset = worleyNoiseData.randomHeightOffset;
         float amplitude = noiseData.amplitude;
+        bool calculateSine = worleyNoiseData.calculateSine;
 
         // replace with onvalidate 
         if (worleyNoiseData.chunks.x == 0 || worleyNoiseData.chunks.y == 0) return new float[,] { };
@@ -37,10 +38,19 @@ public class Worley : MonoBehaviour
                     if (distance < minDistance) minDistance = distance + Random.Range(randomHeightOffset.x, randomHeightOffset.y);
                 }
 
+                float worleyNoiseheight = (
+                    calculateSine ? Mathf.Sin(minDistance) * amplitude :
+                    minDistance * amplitude
+                );
+
                 if(noiseCurve != null)
-                    worleyNoise[x, y] = noiseCurve.Evaluate(minDistance) * amplitude;
+                {
+                    worleyNoise[x, y] = noiseCurve.Evaluate(worleyNoiseheight) * amplitude;
+                }
                 else
-                    worleyNoise[x, y] = minDistance * amplitude;
+                {
+                    worleyNoise[x, y] = worleyNoiseheight;
+                }
             }
         }
 

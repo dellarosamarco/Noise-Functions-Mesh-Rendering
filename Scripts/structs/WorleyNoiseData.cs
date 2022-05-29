@@ -8,4 +8,5 @@ public struct WorleyNoiseData
     [Range(0,100)]
     public float spawnRate;
     public Vector2 randomHeightOffset;
+    public bool calculateSine;
 }

@@ -10,6 +10,7 @@ public class NoiseGenerator : MonoBehaviour
     public SineNoiseData sineNoiseData;
     public TanNoiseData tanNoiseData;
     public CircleNoiseData circlesNoiseData;
+    public BumpsNoiseData bumpsNoiseData;
     public WorleyNoiseData worleyNoiseData;
 
     [Header("Settings")]
@@ -35,6 +36,8 @@ public class NoiseGenerator : MonoBehaviour
             noise = Tan.generateTanNoise(noiseData, tanNoiseData);
         else if (noiseType == NoiseType.Circles)
             noise = Circles.generateCirclesNoise(noiseData, circlesNoiseData);
+        else if(noiseType == NoiseType.Bumps)
+            noise = Bumps.generateBumpsNoise(noiseData, bumpsNoiseData);
         else if (noiseType == NoiseType.Worley)
             noise = Worley.generateWorleyNoise(noiseData, worleyNoiseData);
         else
