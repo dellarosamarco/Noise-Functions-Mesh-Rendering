@@ -4,5 +4,6 @@ public enum NoiseType
     Tan,
     Circles,
     Bumps,
-    Worley
+    Worley,
+    Perlin
 }

@@ -12,6 +12,7 @@ public class NoiseGenerator : MonoBehaviour
     public CircleNoiseData circlesNoiseData;
     public BumpsNoiseData bumpsNoiseData;
     public WorleyNoiseData worleyNoiseData;
+    public PerlinNoiseData perlinNoiseData;
 
     [Header("Settings")]
     public int seed;
@@ -40,6 +41,8 @@ public class NoiseGenerator : MonoBehaviour
             noise = Bumps.generateBumpsNoise(noiseData, bumpsNoiseData);
         else if (noiseType == NoiseType.Worley)
             noise = Worley.generateWorleyNoise(noiseData, worleyNoiseData);
+        else if(noiseType == NoiseType.Perlin)
+            noise = Perlin.generatePerlinNoise(noiseData, perlinNoiseData);
         else
             noise = new float[0, 0];
 
