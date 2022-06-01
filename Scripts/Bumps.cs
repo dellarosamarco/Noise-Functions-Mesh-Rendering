@@ -15,9 +15,6 @@ public class Bumps : MonoBehaviour
         float xPersistance = bumpsNoiseData.xPersistance;
         float yPersistance = bumpsNoiseData.yPersistance;
 
-        //float lowestNoiseHeight = 0f;
-        //float highestNoiseHeight = 0f;
-
         int xSize = noiseData.mapSize.x;
         int ySize = noiseData.mapSize.y;
 
@@ -45,25 +42,8 @@ public class Bumps : MonoBehaviour
                     bumpsNoise[x, y] = noiseCurve.Evaluate(noiseHeight);
                 else
                     bumpsNoise[x, y] = noiseHeight;
-
-                //if (noiseHeight > highestNoiseHeight)
-                //{
-                //    highestNoiseHeight = noiseHeight;
-                //}
-                //else if (noiseHeight < lowestNoiseHeight)
-                //{
-                //    lowestNoiseHeight = noiseHeight;
-                //}
             }
         }
-
-        //for (int x = 0; x < xSize; x++)
-        //{
-        //    for (int y = 0; y < ySize; y++)
-        //    {
-        //        sineNoise[x, y] = Mathf.Sin(Mathf.InverseLerp(lowestNoiseHeight, highestNoiseHeight, sineNoise[x, y])) * amplitude;
-        //    }
-        //}
 
         return bumpsNoise;
     }

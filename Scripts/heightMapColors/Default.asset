@@ -13,7 +13,4 @@ MonoBehaviour:
   m_Name: Default
   m_EditorClassIdentifier: 
   noiseTitle: Default
-  colors:
-  - title: 
-    color: {r: 0.87843144, g: 0.83921576, b: 0.7372549, a: 1}
-    height: 1
+  colors: []

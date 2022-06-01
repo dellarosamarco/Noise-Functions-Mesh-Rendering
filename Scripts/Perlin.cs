@@ -22,7 +22,6 @@ public class Perlin : MonoBehaviour
         float[,] perlinNoise = new float[xSize, ySize];
 
         Vector2[] octavesOffsets = new Vector2[octaves];
-        System.Random rd = new System.Random();
         for (int i = 0; i < octavesOffsets.Length; i++)
         {
             float xOffset = Random.Range(-100000,100000) + offset.x;

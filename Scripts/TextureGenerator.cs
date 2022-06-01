@@ -9,14 +9,17 @@ public static class TextureGenerator
 
         Texture2D texture = new Texture2D(xSize, ySize);
 
+        float[,] normalizedNoise = normalizeNoise(noise);
+
         for (int x = 0; x < xSize; x++)
         {
             for (int y = 0; y < ySize; y++)
             {
-                Color color = Color.Lerp(Color.black, Color.white, noise[x, y]);
+                Color color = new Color(normalizedNoise[x, y], normalizedNoise[x, y], normalizedNoise[x, y]);
+
                 for (int i = 0; i < heightMapColors.Length; i++)
                 {
-                    if(noise[x, y] <= heightMapColors[i].height * amplitude)
+                    if(normalizedNoise[x, y] <= heightMapColors[i].height)
                     {
                         color = heightMapColors[i].color;
                         break;
@@ -33,4 +36,40 @@ public static class TextureGenerator
 
         return texture;
     }
+
+    private static float[,] normalizeNoise(float[,] noise)
+    {
+        float highestValue = 0f;
+        float lowestValue = 0f;
+
+        int xLength = noise.GetLength(0);
+        int yLength = noise.GetLength(1);
+
+        float[,] normalizedNoise = new float[xLength, yLength];
+
+        for (int x = 0; x < xLength; x++)
+        {
+            for (int y = 0; y < yLength; y++)
+            {
+                if(noise[x,y] > highestValue)
+                {
+                    highestValue = noise[x, y];
+                }
+                else if(noise[x,y] < lowestValue)
+                {
+                    lowestValue = noise[x, y];
+                }
+            }
+        }
+
+        for (int x = 0; x < xLength; x++)
+        {
+            for (int y = 0; y < yLength; y++)
+            {
+                normalizedNoise[x, y] = noise[x, y] / highestValue;
+            }
+        }
+
+        return normalizedNoise;
+    } 
 }

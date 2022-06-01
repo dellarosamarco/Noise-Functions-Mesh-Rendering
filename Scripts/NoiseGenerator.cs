@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class NoiseGenerator : MonoBehaviour
 {
+    public int seed;
+
     public NoiseType noiseType;
     public DrawType drawType;
     public ColorType colorType;
@@ -13,9 +15,6 @@ public class NoiseGenerator : MonoBehaviour
     public BumpsNoiseData bumpsNoiseData;
     public WorleyNoiseData worleyNoiseData;
     public PerlinNoiseData perlinNoiseData;
-
-    [Header("Settings")]
-    public int seed;
 
     [Header("Renderers")]
     public Mesh defaultMesh;
