@@ -26,8 +26,8 @@ public class Bumps : MonoBehaviour
             {
                 float octaveAmplitude = amplitude;
                 //float octaveFrequency = frequency;
-                float xOctave = x;
-                float yOctave = y;
+                float xOctave = x / bumpsNoiseData.scale * frequency;
+                float yOctave = y / bumpsNoiseData.scale * frequency;
 
                 for (int i = 0; i < octaves; i++)
                 {
