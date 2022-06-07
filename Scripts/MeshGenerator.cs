@@ -10,7 +10,7 @@ public static class MeshGenerator
         int ySize = mapSize.y;
 
         Vector3[] vertices = new Vector3[xSize * ySize];
-        int[] triangles = new int[vertices.Length * 6];
+        int[] triangles = new int[vertices.Length * 12];
         Vector2[] uvs = new Vector2[vertices.Length];
 
         int vertex = 0;

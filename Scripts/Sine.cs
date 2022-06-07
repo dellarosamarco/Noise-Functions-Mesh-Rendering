@@ -8,9 +8,11 @@ public static class Sine
         float amplitude = noiseData.amplitude;
         float frequency = sineNoiseData.frequency;
         int octaves = sineNoiseData.octaves;
-        Vector2 octaveRandomOffset = sineNoiseData.octaveRandomOffset;
+        Vector2 octaveRandomOffset = new Vector2(sineNoiseData.xOctaveOffset, sineNoiseData.yOctaveOffset);
         float xPersistance = sineNoiseData.xPersistance;
         float yPersistance = sineNoiseData.yPersistance;
+        Vector2 trajectoryRange = new Vector2(sineNoiseData.trajectory, sineNoiseData.trajectory * -1);
+        float maxTrajectoryValue = sineNoiseData.maxTrajectory;
 
         float lowestNoiseHeight = 0f;
         float highestNoiseHeight = 0f;
@@ -19,6 +21,8 @@ public static class Sine
         int ySize = noiseData.mapSize.y;
 
         float[,] sineNoise = new float[xSize, ySize];
+
+        float trajectory = 0f;
 
         float sineIndex = 1 + (noiseData.offset.y * xSize + noiseData.offset.x);
         for (int x = 0; x < xSize; x++)
@@ -30,7 +34,10 @@ public static class Sine
 
                 for (int i = 0; i < octaves; i++)
                 {
-                    sineIndex += Random.Range(octaveRandomOffset.x, octaveRandomOffset.y);
+                    if(trajectory < maxTrajectoryValue)
+                        trajectory += Random.Range(trajectoryRange.x, trajectoryRange.y);
+
+                    sineIndex += Random.Range(octaveRandomOffset.x, octaveRandomOffset.y) + trajectory;
                     octaveAmplitude *= Random.Range(xPersistance,yPersistance);
                 }
 
