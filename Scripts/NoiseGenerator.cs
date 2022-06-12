@@ -9,7 +9,15 @@ public class NoiseGenerator : MonoBehaviour
     public ColorType colorType;
 
     public NoiseData noiseData;
-    public SineNoiseData sineNoiseData;
+    public SineNoiseData sineNoiseData = new SineNoiseData() { 
+        frequency=0.25f, 
+        octaves=1,
+        xPersistance=1, 
+        yPersistance=1,
+        trajectory=0f,
+        maxTrajectory=0f
+    };
+
     public TanNoiseData tanNoiseData;
     public CircleNoiseData circlesNoiseData;
     public BumpsNoiseData bumpsNoiseData;
