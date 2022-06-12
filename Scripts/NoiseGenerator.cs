@@ -12,6 +12,8 @@ public class NoiseGenerator : MonoBehaviour
     public SineNoiseData sineNoiseData = new SineNoiseData() { 
         frequency=0.25f, 
         octaves=1,
+        xOctaveOffset=0f,
+        yOctaveOffset=1f,
         xPersistance=1, 
         yPersistance=1,
         trajectory=0f,
