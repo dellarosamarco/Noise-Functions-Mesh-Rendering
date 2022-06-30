@@ -4,7 +4,9 @@
 
 ## Sine function
 
-
-
 https://user-images.githubusercontent.com/96957446/173436282-a9f1c404-32c7-488e-b119-697fe232008f.mp4
+
+## Tan function
+
+https://user-images.githubusercontent.com/96957446/176763133-8986ab18-5e9b-4f40-a6f5-0e98e88780b0.mp4
 
