@@ -39,6 +39,8 @@ public static class Sine
 
                     sineIndex += Random.Range(octaveRandomOffset.x, octaveRandomOffset.y) + trajectory;
                     octaveAmplitude *= Random.Range(xPersistance,yPersistance);
+
+                    sineIndex /= noiseData.scale;
                 }
 
                 float noiseHeight = Mathf.Sin(sineIndex * octaveFrequency) * octaveAmplitude;
