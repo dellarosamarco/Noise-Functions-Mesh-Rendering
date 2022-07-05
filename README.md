@@ -8,7 +8,7 @@ https://user-images.githubusercontent.com/96957446/173436282-a9f1c404-32c7-488e-
 
 ## Tan noise function
 
-https://user-images.githubusercontent.com/96957446/176763133-8986ab18-5e9b-4f40-a6f5-0e98e88780b0.mp4
+https://user-images.githubusercontent.com/96957446/177420691-e7002085-12e2-4c62-a60e-8ef1c014723b.mp4
 
 ## Circle noise function
 
