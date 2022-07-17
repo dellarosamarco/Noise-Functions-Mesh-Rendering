@@ -14,3 +14,6 @@ https://user-images.githubusercontent.com/96957446/177420691-e7002085-12e2-4c62-
 
 https://user-images.githubusercontent.com/96957446/177420532-8c7b2238-f62e-476b-8aad-6810696d9913.mp4
 
+## Bump noise function
+
+https://user-images.githubusercontent.com/96957446/179396703-bf6789b0-0e5f-4d64-a2de-170722f47692.mp4
