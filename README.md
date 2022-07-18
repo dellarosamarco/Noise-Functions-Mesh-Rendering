@@ -2,6 +2,10 @@
 ## Texture Mapping
 ![texture mapping](https://user-images.githubusercontent.com/96957446/170505824-e61eabf2-490a-4a7d-bad0-9094cbeacbbd.PNG)
 
+## Worley noise function
+
+https://user-images.githubusercontent.com/96957446/179606884-05ff6a20-c1f7-41a8-96eb-8e82cb9bdcf1.mp4
+
 ## Sine noise function
 
 https://user-images.githubusercontent.com/96957446/173436282-a9f1c404-32c7-488e-b119-697fe232008f.mp4
